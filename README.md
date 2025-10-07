@@ -82,8 +82,8 @@ This project is perfect for Hacktoberfest!
 - Mobile support and multi-device recognition.
 
 
-If you are new to Open source, u may refer to (This Guideline)[https://medium.com/@saumyayadav213/kickstart-your-open-source-journey-with-gssoc-no-experience-needed-39f5934418a0]
+If you are new to Open source, u may refer to [This Guideline](https://medium.com/@saumyayadav213/kickstart-your-open-source-journey-with-gssoc-no-experience-needed-39f5934418a0)
 
 ![Hacktoberfest](https://img.shields.io/badge/Hacktoberfest-2025-blue)
 ![License: MIT](https://img.shields.io/badge/License-MIT-green)
-![Issues](https://img.shields.io/github/issues/your-username/SmartAttendance)
+![Issues](https://img.shields.io/github/issues/saumyayadav25/hacktoberfest)
