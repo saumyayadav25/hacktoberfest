@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Attendance — SmartAttendance</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@vladmandic/face-api@1/dist/face-api.js"></script>
+  <script defer src="js/common.js"></script>
+  <script defer src="js/attendance.js"></script>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">SmartAttendance</div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="register.html">Register</a>
+      <a href="attendance.html" class="active">Attendance</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="card">
+      <h2>Take Attendance</h2>
+      <p>Enable webcam, then click <strong>Start Attendance</strong>. The system will try to match faces and mark attendance. You will get a popup when attendance is marked.</p>
+
+      <div class="form-row">
+        <button id="startWebcam" class="btn">Enable Webcam</button>
+        <button id="verifyBtn" class="btn" disabled>Start Attendance</button>
+        <button id="exportBtn" class="btn outline">Export CSV (Today)</button>
+      </div>
+
+      <video id="webcam" autoplay muted></video>
+      <div id="attResult" class="status"></div>
+
+      <h3>Today's Attendance</h3>
+      <div id="todayList" class="list"></div>
+
+    </section>
+  </main>
+
+  <div id="modal" class="modal hidden">
+    <div class="modal-inner">
+      <div id="modalMessage"></div>
+      <button id="modalClose" class="btn">Close</button>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,185 @@
+:root {
+  --bg: #f6f7fb;
+  --card: #fff;
+  --accent: #0078ff;
+  --muted: #666;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Inter, Segoe UI, Arial, sans-serif;
+  background: var(--bg);
+  color: #222;
+  margin: 0;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.logo {
+  font-weight: 700;
+}
+
+.nav-links a {
+  margin-left: 18px;
+  color: #333;
+  text-decoration: none;
+}
+
+.nav-links a.active {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* Container & Cards */
+.container {
+  max-width: 900px;
+  margin: 28px auto;
+  padding: 0 16px;
+}
+
+.card {
+  background: var(--card);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+}
+
+h1, h2 {
+  margin: 8px 0;
+}
+
+.lead {
+  color: var(--muted);
+}
+
+/* Forms */
+.form-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+input[type="text"], 
+input[type="file"] {
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+/* Buttons */
+.btn {
+  background: var(--accent);
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn.outline {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+}
+
+/* Preview area */
+.preview-area {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.preview-area img {
+  max-width: 160px;
+  border-radius: 8px;
+}
+
+/* Status and lists */
+.status {
+  margin-top: 8px;
+  color: #333;
+}
+
+.list {
+  margin-top: 12px;
+  max-height: 220px;
+  overflow: auto;
+  border-radius: 8px;
+  padding: 8px;
+  background: #fafafa;
+  border: 1px solid #eee;
+}
+
+.list .item {
+  padding: 8px;
+  border-bottom: 1px solid #eee;
+}
+
+/* Notes */
+.note {
+  color: var(--muted);
+  margin-top: 12px;
+}
+
+/* Video */
+video {
+  max-width: 360px;
+  border-radius: 8px;
+  margin-top: 12px;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  color: var(--muted);
+  margin: 30px 0;
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-inner {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 400px;
+  text-align: center;
+}
+
+/* Home page quick links */
+.quick-list {
+  list-style: disc;
+  margin-left: 20px;
+}
+
+.home-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+  justify-content: center;
+}

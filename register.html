@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Register — SmartAttendance</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@vladmandic/face-api@1/dist/face-api.js"></script>
+  <script defer src="js/common.js"></script>
+  <script defer src="js/register.js"></script>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">SmartAttendance</div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="register.html" class="active">Register</a>
+      <a href="attendance.html">Attendance</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="card">
+      <h2>Register Student</h2>
+      <p>Upload a clear photo of college ID card and enter the student's name and enrollment number.</p>
+
+      <div class="form-row">
+        <input id="userName" type="text" placeholder="Student name" />
+        <input id="userIdNumber" type="text" placeholder="Student enr. no." />
+      </div>
+
+      <div class="form-row">
+        <input id="idImageInput" type="file" accept="image/*" />
+        <button id="extractBtn" class="btn">Register Student</button>
+      </div>
+
+      <div class="preview-area">
+        <img id="idImage" alt="preview" />
+        <div id="registerResult" class="status"></div>
+      </div>
+
+      <h3>Registered Students</h3>
+      <div id="registeredList" class="list"></div>
+
+    </section>
+  </main>
+
+  <div id="modal" class="modal hidden">
+    <div class="modal-inner">
+      <div id="modalMessage"></div>
+      <button id="modalClose" class="btn">Close</button>
+    </div>
+  </div>
+
+</body>
+</html>
