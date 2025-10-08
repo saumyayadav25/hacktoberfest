@@ -1,39 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>SmartAttendance</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-  <nav class="navbar">
-    <div class="logo">SmartAttendance</div>
-    <div class="nav-links">
-      <a href="index.html" class="active">Home</a>
-      <a href="register.html">Register</a>
-      <a href="attendance.html">Attendance</a>
+  <nav class="nav-bar">
+    <div class="nav-content">
+      <span class="logo">SmartAttendance</span>
+      <div class="nav-links">
+        <a href="index.html" class="active">Home</a>
+        <a href="register.html">Register</a>
+        <a href="attendance.html">Attendance</a>
+      </div>
     </div>
   </nav>
-
-  <main class="container">
-    <section class="card">
-      <h1>Welcome to SmartAttendance</h1>
-      <p class="lead">A face recognition attendance system.</p>
-
-      <ul class="quick-list">
-        <li><strong>Register</strong> students on the Register page (upload image with name and enrollment number).</li>
-        <li><strong>Take Attendance</strong> on the Attendance page using webcam.</li>
-        <li>Data is stored in <code>localStorage</code></li>
+  <main>
+    <section class="hero-card">
+      <h1>Welcome to <span class="brand-gradient">SmartAttendance</span></h1>
+      
+      <ul class="feature-list">
+        <li><b>Register</b> students on the Register page (upload ID photo, name, enrollment number).</li>
+        <li><b>Take Attendance</b> with live webcam face recognition.</li>
+        <li>All data stored securely in <code>localStorage</code>.</li>
       </ul>
-
-      <div class="home-actions">
-        <a class="btn" href="register.html">Go to Register</a>
-        <a class="btn outline" href="attendance.html">Start Attendance</a>
+      <div class="actions">
+        <a href="register.html" class="btn btn-main"> Register</a>
+        <a href="attendance.html" class="btn btn-alt"> Attendance</a>
       </div>
-
     </section>
   </main>
-
 </body>
 </html>
