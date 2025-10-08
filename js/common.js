@@ -237,13 +237,12 @@ const AttendanceManager = {
             throw new SmartAttendanceError('No records found for the specified date', 'NO_RECORDS');
         }
 
-        const headers = ['Name', 'ID', 'Time', 'Confidence'];
-        const csvContent = [
+        const headers = ['Name', 'ID', 'Time'];
+            csvContent = [
             headers.join(','),
-            ...records.map(record => 
-                `"${record.name}","${record.id}","${record.time}","${(record.confidence * 100).toFixed(1)}%"`
-            )
+            ...records.map(record => `"${record.name}","${record.id}","${record.time}"`)
         ].join('\n');
+
 
         return csvContent;
     }
