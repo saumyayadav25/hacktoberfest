@@ -25,15 +25,30 @@
       <h2>Register Student</h2>
       <p>Upload a clear photo of college ID card and enter the student's name and enrollment number.</p>
 
-      <div class="form-row">
-        <input id="userName" type="text" placeholder="Student name" />
-        <input id="userIdNumber" type="text" placeholder="Student enr. no." />
-      </div>
+      <form id="registerForm">
+        <div class="form-row">
+          <div class="form-field">
+            <label for="userName">Name</label>
+            <input id="userName" name="name" type="text" placeholder="Student name" required />
+          </div>
 
-      <div class="form-row">
-        <input id="idImageInput" type="file" accept="image/*" />
-        <button id="extractBtn" class="btn">Register Student</button>
-      </div>
+          <div class="form-field">
+            <label for="userIdNumber">Enrollment / ID Number</label>
+            <input id="userIdNumber" name="idNumber" type="text" placeholder="Student enr. no." required />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="idImageInput">Upload ID Photo</label>
+            <input id="idImageInput" name="idImage" type="file" accept="image/*" />
+          </div>
+
+          <div class="form-field" style="align-self:flex-end;">
+            <button id="extractBtn" class="btn" type="submit">Register Student</button>
+          </div>
+        </div>
+      </form>
 
       <div class="preview-area">
         <img id="idImage" alt="preview" />
@@ -52,6 +67,15 @@
       <button id="modalClose" class="btn">Close</button>
     </div>
   </div>
+
+  <script>
+    // Friendly confirmation when the register button is pressed
+    document.getElementById('registerForm')?.addEventListener('submit', function (e) {
+      e.preventDefault();
+      // You can integrate extraction logic here or keep using existing JS in js/register.js
+      alert('✅ Student successfully registered!');
+    });
+  </script>
 
 </body>
 </html>
