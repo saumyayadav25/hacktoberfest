@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   const result = document.getElementById('registerResult');
   const regList = document.getElementById('registeredList');
   const btn = document.getElementById('extractBtn');
+  const form = document.getElementById('registerForm');
   const modal = document.getElementById('modal');
   const modalMessage = document.getElementById('modalMessage');
   const modalClose = document.getElementById('modalClose');
@@ -41,7 +42,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
     img.src = URL.createObjectURL(f);
   });
 
-  btn.addEventListener('click', async ()=>{
+  // Handle form submission (prevents default submit and runs the registration flow)
+  form?.addEventListener('submit', async (e)=>{
+    e.preventDefault();
     const name = nameInput.value.trim(); 
     const id = idInput.value.trim();
     if(!name) return result.innerText = 'Enter name first';
