@@ -74,5 +74,28 @@ async function loadModelsUI(){
 // initialize DB into memory
 loadDB();
 
+// ------------------- Dark/Light Mode Integration -------------------
+const themeToggleButtons = document.querySelectorAll('#theme-toggle');
+const body = document.body;
+
+// Initialize theme from localStorage
+if (localStorage.getItem('theme') === 'dark') {
+  body.classList.add('dark-mode');
+  themeToggleButtons.forEach(btn => btn.textContent = '🌕');
+}
+
+// Add toggle event for each page
+themeToggleButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
+    const isDark = body.classList.contains('dark-mode');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    themeToggleButtons.forEach(b => b.textContent = isDark ? '🌕' : '🌙');
+  });
+});
+
 // expose
 window.SmartAttendance = { registeredFaces, attendanceLog, saveDB, loadDB, bestMatch, markAttendanceRecord, loadModelsUI };
+
+
+
