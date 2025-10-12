@@ -1,4 +1,4 @@
-// This function sends data to your new backend server.
+// This function sends data to backend server.
 async function saveStudentToDatabase(studentName, studentID) {
     try {
         const response = await fetch('http://localhost:3000/api/register', {
@@ -10,11 +10,40 @@ async function saveStudentToDatabase(studentName, studentID) {
         if (response.ok) {
             console.log('Student data saved successfully to the database.');
             alert('Student registered and saved to the database!');
+            return true; // ✅ Return success status
         } else {
             console.error('Failed to save student to the database.');
+            return false;
         }
     } catch (error) {
         console.error('Error connecting to the server:', error);
+        return false;
+    }
+}
+
+// Function to fetch and display registered students
+async function fetchAndDisplayRegisteredStudents() {
+    try {
+        const response = await fetch('http://localhost:3000/api/student');
+        const registeredList = document.getElementById('registeredList');
+
+        if (response.ok) {
+            const student = await response.json();
+            registeredList.innerHTML = `
+                <div class="student-item">
+                    <strong>${student.name}</strong> (ID: ${student.studentId})
+                    <br>
+                    <small>Registered: ${new Date(student.registeredAt).toLocaleString()}</small>
+                </div>
+            `;
+        } else if (response.status === 404) {
+            registeredList.innerHTML = '<div class="no-students">No students registered yet.</div>';
+        } else {
+            registeredList.innerHTML = '<div class="error">Error loading registered students.</div>';
+        }
+    } catch (error) {
+        console.error('Error fetching registered students:', error);
+        document.getElementById('registeredList').innerHTML = '<div class="error">Error loading registered students.</div>';
     }
 }
 
@@ -28,6 +57,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('modal');
     const modalMessage = document.getElementById('modalMessage');
     const modalClose = document.getElementById('modalClose');
+
+    // Loads registered students when page loads
+    fetchAndDisplayRegisteredStudents();
 
     function showModal(msg) {
         modalMessage.innerText = msg;
@@ -68,7 +100,6 @@ document.addEventListener('DOMContentLoaded', () => {
         result.innerText = 'Detecting face...';
 
         try {
-            // Fixed: Removed the malformed character before TinyFaceDetectorOptions
             const detection = await faceapi.detectSingleFace(img, new faceapi.TinyFaceDetectorOptions())
                 .withFaceLandmarks()
                 .withFaceDescriptor();
@@ -79,10 +110,23 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Call the function to save data to the server
-            await saveStudentToDatabase(name, id);
+            const saveSuccess = await saveStudentToDatabase(name, id);
 
-            result.innerText = `Registered ${name}`;
-            showModal(`${name} registered successfully`);
+            if (saveSuccess) {
+                result.innerText = `Registered ${name}`;
+                showModal(`${name} registered successfully`);
+
+                // Clears the form after successful registration
+                nameInput.value = '';
+                idInput.value = '';
+                fileInput.value = '';
+                img.src = '';
+
+                // Updates the registered students list
+                await fetchAndDisplayRegisteredStudents();
+            } else {
+                result.innerText = 'Registration failed - server error';
+            }
 
         } catch (e) {
             console.error(e);
