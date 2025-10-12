@@ -1,0 +1,28 @@
+{
+  "name": "hacktoberfest",
+  "version": "1.0.0",
+  "description": "SmartAttendance is a **minimal, in-browser face recognition attendance system** built using **face-api.js**. It allows students to register their ID photos and mark attendance via webcam. The project is designed for Hacktoberfest contributions, and as a foundation for more advanced attendance solutions.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aryadharmadhikari/hacktoberfest.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/aryadharmadhikari/hacktoberfest/issues"
+  },
+  "homepage": "https://github.com/aryadharmadhikari/hacktoberfest#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "mongodb": "^6.20.0",
+    "mongoose": "^8.19.1"
+  }
+}
