@@ -28,14 +28,24 @@ async function fetchAndDisplayRegisteredStudents() {
         const registeredList = document.getElementById('registeredList');
 
         if (response.ok) {
-            const student = await response.json();
-            registeredList.innerHTML = `
+            const students = await response.json();
+
+            // Handle both single student (old format) and multiple students (new format)
+            const studentsArray = Array.isArray(students) ? students : [students];
+
+            if (studentsArray.length === 0) {
+                registeredList.innerHTML = '<div class="no-students">No students registered yet.</div>';
+                return;
+            }
+
+            registeredList.innerHTML = studentsArray.map(student => `
                 <div class="student-item">
                     <strong>${student.name}</strong> (ID: ${student.studentId})
                     <br>
                     <small>Registered: ${new Date(student.registeredAt).toLocaleString()}</small>
                 </div>
-            `;
+            `).join('');
+
         } else if (response.status === 404) {
             registeredList.innerHTML = '<div class="no-students">No students registered yet.</div>';
         } else {
@@ -46,6 +56,7 @@ async function fetchAndDisplayRegisteredStudents() {
         document.getElementById('registeredList').innerHTML = '<div class="error">Error loading registered students.</div>';
     }
 }
+
 
 document.addEventListener('DOMContentLoaded', () => {
     const nameInput = document.getElementById('userName');

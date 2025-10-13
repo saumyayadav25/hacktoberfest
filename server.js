@@ -36,12 +36,25 @@ const Student = mongoose.model('Student', studentSchema);
 // POST: Register a new student
 app.post('/api/register', async (req, res) => {
     try {
-        // Since only one student's data should persist, clear old data first
-        await Student.deleteMany({});
+        // ✅ REMOVED: await Student.deleteMany({});
+
+        // Optional: Check if student already exists to prevent duplicates
+        const existingStudent = await Student.findOne({
+            studentId: req.body.studentId
+        });
+
+        if (existingStudent) {
+            return res.status(409).json({
+                message: 'Student with this ID already exists',
+                student: existingStudent
+            });
+        }
+
         const newStudent = new Student({
             name: req.body.name,
             studentId: req.body.studentId
         });
+
         await newStudent.save();
         res.status(201).json(newStudent);
     } catch (error) {
@@ -49,17 +62,18 @@ app.post('/api/register', async (req, res) => {
     }
 });
 
-// GET: Retrieve the currently registered student
+
+// GET: Retrieve all registered students
 app.get('/api/student', async (req, res) => {
     try {
-        const student = await Student.findOne().sort({ registeredAt: -1 }); // Get the latest one
-        if (student) {
-            res.status(200).json(student);
+        const students = await Student.find().sort({ registeredAt: -1 });
+        if (students.length > 0) {
+            res.status(200).json(students);  // Return array of all students
         } else {
-            res.status(404).json({ message: 'No student is currently registered.' });
+            res.status(404).json({ message: 'No students are currently registered.' });
         }
     } catch (error) {
-        res.status(500).json({ message: 'Error fetching student', error });
+        res.status(500).json({ message: 'Error fetching students', error });
     }
 });
 
