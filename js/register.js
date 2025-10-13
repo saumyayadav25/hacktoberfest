@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   const img = document.getElementById('idImage');
   const result = document.getElementById('registerResult');
   const regList = document.getElementById('registeredList');
+  const regTableBody = document.querySelector('#registeredTable tbody');
   const btn = document.getElementById('extractBtn');
   const modal = document.getElementById('modal');
   const modalMessage = document.getElementById('modalMessage');
@@ -31,6 +32,18 @@ document.addEventListener('DOMContentLoaded', ()=>{
       d.innerText = `${st.name} ${st.id? '('+st.id+')':''}`;
       regList.appendChild(d);
     });
+
+    // table view
+    if (regTableBody){
+      regTableBody.innerHTML = '';
+      arr.forEach(st => {
+        const tr = document.createElement('tr');
+        const td1 = document.createElement('td'); td1.textContent = st.name;
+        const td2 = document.createElement('td'); td2.textContent = st.id || '-';
+        tr.appendChild(td1); tr.appendChild(td2);
+        regTableBody.appendChild(tr);
+      });
+    }
   }
 
   refreshList();
@@ -44,8 +57,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
   btn.addEventListener('click', async ()=>{
     const name = nameInput.value.trim(); 
     const id = idInput.value.trim();
-    if(!name) return result.innerText = 'Enter name first';
-    if(!fileInput.files[0]) return result.innerText = 'Choose an image file';
+    if(!name){ result.classList.add('error'); return result.innerText = 'Enter name first'; }
+    if(!fileInput.files[0]){ result.classList.add('error'); return result.innerText = 'Choose an image file'; }
 
     result.innerText = 'Loading models...';
     const ok = await SmartAttendance.loadModelsUI();
@@ -62,13 +75,13 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
       // duplicate name
       const nameDup = SmartAttendance.registeredFaces.some(st => st.name.toLowerCase() === name.toLowerCase());
-      if(nameDup){ showModal('Student already registered with this name'); return; }
+      if(nameDup){ result.classList.add('error'); showModal('Student already registered with this name'); return; }
 
       // duplicate face
       const isDuplicateFace = SmartAttendance.registeredFaces.some(st=>{
         return faceapi.euclideanDistance(st.descriptor, detection.descriptor) < 0.6;
       });
-      if(isDuplicateFace){ showModal('This face is already registered'); return; }
+      if(isDuplicateFace){ result.classList.add('error'); showModal('This face is already registered'); return; }
 
       // add student
       const newStudent = {
@@ -79,6 +92,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
       SmartAttendance.registeredFaces.push(newStudent);
       SmartAttendance.saveDB();
 
+      result.classList.remove('error');
       result.innerText = `Registered ${name}`;
       showModal(`${name} registered successfully`);
       refreshList();
