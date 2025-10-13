@@ -5,6 +5,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
   const video = document.getElementById('webcam');
   const attResult = document.getElementById('attResult');
   const todayList = document.getElementById('todayList');
+  const historyTableBody = document.querySelector('#historyTable tbody');
+  const searchInput = document.getElementById('searchInput');
+  const dateInput = document.getElementById('dateInput');
   const modal = document.getElementById('modal');
   const modalMessage = document.getElementById('modalMessage');
   const modalClose = document.getElementById('modalClose');
@@ -33,6 +36,44 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
   renderToday();
 
+  function renderHistory(){
+    if(!historyTableBody) return;
+    SmartAttendance.loadDB();
+    const entries = [];
+    for(const day in SmartAttendance.attendanceLog){
+      (SmartAttendance.attendanceLog[day]||[]).forEach(it=>{
+        entries.push({ date: day, name: it.name, id: it.id||'', time: it.time });
+      });
+    }
+
+    const q = (searchInput?.value || '').toLowerCase();
+    const selDate = dateInput?.value || '';
+    const filtered = entries.filter(e=>{
+      const matchQ = !q || e.name.toLowerCase().includes(q) || e.id.toLowerCase().includes(q);
+      const matchD = !selDate || e.date === selDate;
+      return matchQ && matchD;
+    }).sort((a,b)=> (a.date+b.time < b.date+a.time ? 1 : -1));
+
+    historyTableBody.innerHTML = '';
+    if(!filtered.length){
+      const tr = document.createElement('tr');
+      const td = document.createElement('td');
+      td.colSpan = 4; td.textContent = 'No records';
+      tr.appendChild(td); historyTableBody.appendChild(tr);
+      return;
+    }
+
+    filtered.forEach(e=>{
+      const tr=document.createElement('tr');
+      tr.innerHTML = `<td>${e.date}</td><td>${e.name}</td><td>${e.id||'-'}</td><td>${e.time}</td>`;
+      historyTableBody.appendChild(tr);
+    });
+  }
+
+  searchInput?.addEventListener('input', renderHistory);
+  dateInput?.addEventListener('change', renderHistory);
+  renderHistory();
+
   startBtn.addEventListener('click', async ()=>{
     try{
       stream = await navigator.mediaDevices.getUserMedia({ video:true });
@@ -46,7 +87,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     if(!running){
       running=true; runBtn.innerText='Stop Attendance'; attResult.innerText='Loading models...';
       const ok = await SmartAttendance.loadModelsUI();
-      if(!ok){ attResult.innerText='Model load failed'; running=false; runBtn.innerText='Start Attendance'; return; }
+      if(!ok){ attResult.classList.add('error'); attResult.innerText='Model load failed'; running=false; runBtn.innerText='Start Attendance'; return; }
       attLoop();
     } else {
       running=false; runBtn.innerText='Start Attendance'; attResult.innerText='Stopped';
@@ -72,9 +113,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
         const match = SmartAttendance.bestMatch(best.descriptor,0.65);
         if(match){
           const res = SmartAttendance.markAttendanceRecord(match);
-          if(res.ok){ showModal(`Attendance done for ${match.name}`); renderToday(); }
-          else attResult.innerText='Already marked recently';
-        } else { attResult.innerText='Unknown face'; }
+          if(res.ok){ showModal(`Attendance done for ${match.name}`); attResult.classList.remove('error'); renderToday(); renderHistory(); }
+          else { attResult.classList.add('error'); attResult.innerText='Already marked recently'; }
+        } else { attResult.classList.add('error'); attResult.innerText='Unknown face'; }
 
       }catch(e){ console.error(e); attResult.innerText='Error in loop'; running=false; runBtn.innerText='Start Attendance'; }
       await sleep(1000);

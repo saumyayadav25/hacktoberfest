@@ -43,6 +43,19 @@
       <div id="attResult" class="status mt-2"></div>
       <h3 class="mt-4">Today's Attendance</h3>
       <div id="todayList" class="list"></div>
+      <div class="mt-4">
+        <h3>Attendance Records</h3>
+        <div class="d-flex gap-2 mb-2 flex-wrap">
+          <input id="searchInput" type="text" class="form-control" placeholder="Search by name or id" />
+          <input id="dateInput" type="date" class="form-control" />
+        </div>
+        <table class="table-clean" id="historyTable">
+          <thead>
+            <tr><th>Date</th><th>Name</th><th>Roll No.</th><th>Time</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
     </section>
   </main>
 
