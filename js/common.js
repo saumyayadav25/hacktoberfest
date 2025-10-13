@@ -94,6 +94,18 @@ themeToggleButtons.forEach(btn => {
   });
 });
 
+// ------------------- Footer year & link interactions -------------------
+try {
+  const yearSpan = document.getElementById('year');
+  if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+} catch (_) {}
+
+// Smooth focus styles for footer links via keyboard
+document.querySelectorAll('.footer-link, .social-btn').forEach(el => {
+  el.addEventListener('focus', () => el.classList.add('focused'));
+  el.addEventListener('blur', () => el.classList.remove('focused'));
+});
+
 // expose
 window.SmartAttendance = { registeredFaces, attendanceLog, saveDB, loadDB, bestMatch, markAttendanceRecord, loadModelsUI };
 
