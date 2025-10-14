@@ -31,23 +31,75 @@
   </nav>
 
   <main class="container mt-4">
+    <section class="card p-4 mb-4">
+      <h2 class="mb-4">Register Student</h2>
+      <p class="text-muted mb-4">Upload a clear photo of the student's face and enter their details to register for attendance.</p>
+      
+      <form id="registrationForm" class="needs-validation" novalidate>
+        <div class="row g-3 mb-4">
+          <div class="col-md-6">
+            <label for="userName" class="form-label">Full Name <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="userName" placeholder="Enter student's full name" required>
+            <div class="invalid-feedback">Please enter the student's name.</div>
+          </div>
+          <div class="col-md-6">
+            <label for="userIdNumber" class="form-label">Enrollment Number <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="userIdNumber" placeholder="Enter enrollment number" required>
+            <div class="invalid-feedback">Please enter a valid enrollment number.</div>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label for="idImageInput" class="form-label">Student's Photo <span class="text-danger">*</span></label>
+          <input class="form-control" type="file" id="idImageInput" accept="image/*" required>
+          <div class="form-text">Upload a clear photo of the student's face. Make sure the face is well-lit and clearly visible.</div>
+          <div class="invalid-feedback">Please upload a photo of the student's face.</div>
+        </div>
+
+        <div class="preview-area text-center mb-4 p-3 border rounded" id="imagePreviewContainer" style="display: none;">
+          <img id="idImage" class="img-thumbnail" style="max-height: 200px;" alt="Preview">
+        </div>
+
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <button type="button" class="btn btn-outline-secondary me-md-2" id="resetBtn">Reset Form</button>
+          <button type="submit" class="btn btn-primary" id="extractBtn">
+            <span class="spinner-border spinner-border-sm d-none" id="registerSpinner" role="status" aria-hidden="true"></span>
+            <span id="registerBtnText">Register Student</span>
+          </button>
+        </div>
+      </form>
+
+      <div id="registerResult" class="alert mt-3 mb-0 d-none" role="alert"></div>
+    </section>
+
     <section class="card p-4">
-      <h2>Register Student</h2>
-      <p>Upload a clear photo of college ID card and enter student name and enrollment number.</p>
-      <div class="form-row d-flex gap-2 flex-wrap mt-3">
-        <input id="userName" type="text" class="form-control" placeholder="Student name" />
-        <input id="userIdNumber" type="text" class="form-control" placeholder="Student enr. no." />
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 class="mb-0">Registered Students</h3>
+        <div class="input-group" style="max-width: 300px;">
+          <span class="input-group-text"><i class="bi bi-search"></i></span>
+          <input type="text" id="searchStudents" class="form-control" placeholder="Search students...">
+        </div>
       </div>
-      <div class="form-row d-flex gap-2 mt-3">
-        <input id="idImageInput" type="file" class="form-control" accept="image/*" />
-        <button id="extractBtn" class="btn btn-primary">Register Student</button>
+      
+      <div class="table-responsive">
+        <table class="table table-hover align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>Photo</th>
+              <th>Name</th>
+              <th>Enrollment No.</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="registeredList">
+            <!-- Filled by JavaScript -->
+          </tbody>
+        </table>
       </div>
-      <div class="preview-area mt-3 d-flex gap-3 align-items-center">
-        <img id="idImage" alt="preview" />
-        <div id="registerResult" class="status"></div>
+      <div id="noStudents" class="text-center py-4 text-muted">
+        <i class="bi bi-people fs-1 d-block mb-2"></i>
+        No students registered yet
       </div>
-      <h3 class="mt-4">Registered Students</h3>
-      <div id="registeredList" class="list"></div>
     </section>
   </main>
 
