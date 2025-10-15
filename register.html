@@ -20,31 +20,43 @@
     </div>
   </nav>
 
-  <main class="container">
-    <section class="card">
-      <h2>Register Student</h2>
-      <p>Upload a clear photo of college ID card and enter the student's name and enrollment number.</p>
+ <main class="container">
+  <section class="card">
+    <h2>Register Student</h2>
+    <p>Upload a clear photo of college ID card and enter the student's name and enrollment number.</p>
 
-      <div class="form-row">
-        <input id="userName" type="text" placeholder="Student name" />
-        <input id="userIdNumber" type="text" placeholder="Student enr. no." />
-      </div>
+    <table class="registration-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Enrollment Number</th>
+          <th>ID Image</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input id="userName" type="text" placeholder="Enter name" required /></td>
+          <td><input id="userIdNumber" type="text" placeholder="Enter enrollment number" required /></td>
+          <td>
+            <input id="idImageInput" type="file" accept="image/*" />
+            <img id="idImage" class="preview" alt="Preview" />
+          </td>
+          <td>
+            <button id="extractBtn" class="btn">Register</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-      <div class="form-row">
-        <input id="idImageInput" type="file" accept="image/*" />
-        <button id="extractBtn" class="btn">Register Student</button>
-      </div>
+    <div id="registerResult" class="status"></div>
 
-      <div class="preview-area">
-        <img id="idImage" alt="preview" />
-        <div id="registerResult" class="status"></div>
-      </div>
+    <h3>Registered Students</h3>
+    <div id="registeredList" class="list"></div>
 
-      <h3>Registered Students</h3>
-      <div id="registeredList" class="list"></div>
+  </section>
+</main>
 
-    </section>
-  </main>
 
   <div id="modal" class="modal hidden">
     <div class="modal-inner">
