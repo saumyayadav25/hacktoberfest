@@ -1,11 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Jost:ital,wght@0,100..900;1,100..900&family=Montserrat+Underline:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Outfit:wght@100..900&display=swap');
+
+
+
 /* ---------------- Root Variables ---------------- */
+
 :root {
   --bg: #f6f7fb;
   --card: #fff;
   --accent: #0078ff;
   --muted: #666;
   --navbar-bg: #fff;
-  --navbar-border: #eee;
+  --navbar-border: #f2e1e1;
   --transition-speed: 0.25s;
 }
 
@@ -87,16 +92,70 @@ body {
 }
 
 h1, h2, h3 {
+   font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
   font-weight: 600;
+  font-style: normal;
   margin-bottom: 0.75rem;
 }
 
 p, li {
+    font-family: "Outfit", serif;
+
   font-weight: 400;
 }
 
 .lead {
   color: var(--muted);
+}
+/* ---------------- Welcome Background ---------------- */
+.welcome-bg {
+  background: linear-gradient(135deg, #f8f9ff 0%, #e8f4ff 100%);
+  padding: 2rem;
+  border-radius: 20px;
+  border: 1px solid #e1e8ff;
+  position: relative;
+  overflow: hidden;
+}
+
+.welcome-bg::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 200px;
+  height: 200px;
+  background: linear-gradient(45deg, #0078ff22, #0078ff11);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.welcome-bg::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -5%;
+  width: 150px;
+  height: 150px;
+  background: linear-gradient(45deg, #0078ff11, #0078ff22);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.welcome-bg > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Dark mode support */
+body.dark-mode .welcome-bg {
+  background: linear-gradient(135deg, #1a1f36 0%, #2d3748 100%);
+  border: 1px solid #4a5568;
+}
+
+body.dark-mode .welcome-bg::before,
+body.dark-mode .welcome-bg::after {
+  background: linear-gradient(45deg, #4dabf722, #4dabf711);
 }
 
 /* ---------------- Forms ---------------- */
