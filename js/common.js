@@ -96,6 +96,3 @@ themeToggleButtons.forEach(btn => {
 
 // expose
 window.SmartAttendance = { registeredFaces, attendanceLog, saveDB, loadDB, bestMatch, markAttendanceRecord, loadModelsUI };
-
-
-
