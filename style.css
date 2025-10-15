@@ -447,5 +447,53 @@ body.dark-mode .list,
 body.dark-mode .modal-inner,
 body.dark-mode video,
 body.dark-mode img {
+
  transition: all 0.3s ease-in-out;
 }
+
+  transition: all 0.3s ease-in-out;
+}
+
+/* Fix Start Attendance Button Hover (Light Mode) */
+.btn.outline,
+.btn-outline-primary {
+  background: transparent;
+  color: var(--accent);
+  border: 2px solid var(--accent);
+  transition: all var(--transition-speed) ease;
+}
+
+.btn.outline:hover,
+.btn-outline-primary:hover {
+  background-color: var(--accent);
+  color: #fff; /* Make text readable on hover */
+  border-color: var(--accent);
+  box-shadow: 0 4px 12px rgba(0, 120, 255, 0.3);
+}
+
+/* Input text and placeholder fix for dark mode */
+body.dark-mode input[type="text"],
+body.dark-mode input[type="file"],
+body.dark-mode textarea {
+  background: #2a2a2a;
+  color: #f0f0f0;
+  border-color: #444;
+}
+
+/* Make placeholder text readable */
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+  color: #bbb; /* light gray for visibility */
+  opacity: 1;  /* ensures consistent brightness across browsers */
+}
+
+/* Hover & focus styles for better UX */
+body.dark-mode input[type="text"]:focus,
+body.dark-mode input[type="file"]:focus,
+body.dark-mode textarea:focus {
+  border-color: #4dabf7;
+  box-shadow: 0 0 6px rgba(77, 171, 247, 0.5);
+  outline: none;
+}
+
+

@@ -87,3 +87,11 @@ If you are new to Open source, u may refer to [This Guideline](https://medium.co
 ![Hacktoberfest](https://img.shields.io/badge/Hacktoberfest-2025-blue)
 ![License: MIT](https://img.shields.io/badge/License-MIT-green)
 ![Issues](https://img.shields.io/github/issues/saumyayadav25/hacktoberfest)
+## How to Contribute
+
+1. Fork this repository
+2. Clone it locally
+3. Create a new branch
+4. Make your changes (code, docs, or examples)
+5. Push your branch
+6. Open a Pull Request
