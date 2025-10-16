@@ -159,6 +159,23 @@ input[type="file"]:focus {
   background-color: rgba(77,171,247,0.1);
 }
 
+/* Fix Start Attendance Button Hover (Light Mode) */
+.btn.outline,
+.btn-outline-primary {
+  background: transparent;
+  color: var(--accent);
+  border: 2px solid var(--accent);
+  transition: all var(--transition-speed) ease;
+}
+
+.btn.outline:hover,
+.btn-outline-primary:hover {
+  background-color: var(--accent);
+  color: #fff; /* Make text readable on hover */
+  border-color: var(--accent);
+  box-shadow: 0 4px 12px rgba(0, 120, 255, 0.3);
+}
+
 /* ---------------- Preview & Video ---------------- */
 .preview-area {
   display: flex;
@@ -227,6 +244,71 @@ input[type="file"]:focus {
   justify-content: center;
 }
 
+/* ---------------- Footer ---------------- */
+.footer {
+  /* text-align: center; <-- REMOVED for columnar layout */
+  padding: 40px 10px; /* Increased padding */
+  margin-top: 50px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: #f8f9fa;
+  color: #333;
+  transition: background-color var(--transition-speed) ease,
+              color var(--transition-speed) ease,
+              border-color var(--transition-speed) ease;
+}
+
+.footer h3 {
+  margin-bottom: 12px; /* Adjusted margin */
+  font-weight: 700;
+}
+
+.footer p {
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+/* Footer social icons */
+.footer .social-icons a {
+  margin: 0 8px 0 0; /* Adjusted margin for left-aligned column */
+  color: inherit;
+  font-size: 1.2rem;
+  transition: color var(--transition-speed) ease, transform var(--transition-speed) ease;
+}
+
+.footer .social-icons a:hover {
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* --- NEW Footer Column Styles --- */
+.footer h5 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #222;
+}
+
+.footer .list-unstyled {
+    padding-left: 0;
+    list-style: none;
+}
+
+.footer .list-unstyled li {
+    margin-bottom: 8px;
+}
+
+.footer .list-unstyled a {
+    color: var(--muted);
+    font-size: 0.95rem;
+    transition: color var(--transition-speed) ease;
+}
+
+.footer .list-unstyled a:hover {
+    color: var(--accent);
+}
+/* --- END NEW Footer Column Styles --- */
+
 /* ---------------- Dark Mode ---------------- */
 body.dark-mode {
   background: #121212;
@@ -241,7 +323,7 @@ body.dark-mode #main-navbar {
 }
 
 body.dark-mode #main-navbar .navbar-brand {
-  color: #ffffff; /* Bright brand text */
+  color: #ffffff;
   font-weight: 700;
 }
 
@@ -260,7 +342,7 @@ body.dark-mode #main-navbar .nav-link:hover {
 }
 
 body.dark-mode .navbar-toggler-icon {
-  filter: invert(100%); /* Makes the icon visible in dark mode */
+  filter: invert(100%);
 }
 
 /* Theme toggle button */
@@ -300,7 +382,7 @@ body.dark-mode .list {
 
 /* Solid primary button in dark mode */
 body.dark-mode .btn-primary {
-  background-color: #4dabf7 !important;  /* bright blue */
+  background-color: #4dabf7 !important;
   color: #fff !important;
   border: none;
 }
@@ -321,7 +403,6 @@ body.dark-mode .btn-outline-primary:hover {
   background: #4dabf7;
   color: #fff !important;
 }
-
 
 /* Preview & Video */
 body.dark-mode .preview-area img, body.dark-mode video {
@@ -348,23 +429,6 @@ body.dark-mode img {
   transition: all 0.3s ease-in-out;
 }
 
-/* Fix Start Attendance Button Hover (Light Mode) */
-.btn.outline,
-.btn-outline-primary {
-  background: transparent;
-  color: var(--accent);
-  border: 2px solid var(--accent);
-  transition: all var(--transition-speed) ease;
-}
-
-.btn.outline:hover,
-.btn-outline-primary:hover {
-  background-color: var(--accent);
-  color: #fff; /* Make text readable on hover */
-  border-color: var(--accent);
-  box-shadow: 0 4px 12px rgba(0, 120, 255, 0.3);
-}
-
 /* Input text and placeholder fix for dark mode */
 body.dark-mode input[type="text"],
 body.dark-mode input[type="file"],
@@ -377,8 +441,8 @@ body.dark-mode textarea {
 /* Make placeholder text readable */
 body.dark-mode input::placeholder,
 body.dark-mode textarea::placeholder {
-  color: #bbb; /* light gray for visibility */
-  opacity: 1;  /* ensures consistent brightness across browsers */
+  color: #bbb;
+  opacity: 1;
 }
 
 /* Hover & focus styles for better UX */
@@ -390,3 +454,31 @@ body.dark-mode textarea:focus {
   outline: none;
 }
 
+/* ---------------- Footer Dark Mode ---------------- */
+body.dark-mode .footer {
+  background-color: #1e1e1e;
+  color: #ddd;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .footer p {
+  color: #bbb;
+}
+
+body.dark-mode .footer .social-icons a:hover {
+  color: #4dabf7;
+}
+
+/* --- NEW Dark Mode Column Styles --- */
+body.dark-mode .footer h5 {
+    color: #eee;
+}
+
+body.dark-mode .footer .list-unstyled a {
+    color: #a0a0a0;
+}
+
+body.dark-mode .footer .list-unstyled a:hover {
+    color: #4dabf7;
+}
+/* --- END NEW Dark Mode Column Styles --- */
