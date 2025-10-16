@@ -29,17 +29,23 @@
   </nav>
 
   <main class="container mt-4">
-    <section class="card p-4">
+    <section class="card p-4 text-center">
       <h1>Welcome to SmartAttendance</h1>
       <p class="lead">A face recognition attendance system.</p>
-      <ul class="quick-list">
-        <li><strong>Register</strong> students on the Register page.</li>
+
+      <ul class="quick-list text-start mt-3">
+        <li><strong>Register</strong> students on the Register page (upload image with name and enrollment number).</li>
         <li><strong>Take Attendance</strong> on the Attendance page using webcam.</li>
         <li>Data is stored in <code>localStorage</code>.</li>
       </ul>
-      <div class="home-actions mt-3 d-flex justify-content-center gap-2">
+
+      <div class="home-actions mt-4 d-flex justify-content-center gap-2">
         <a class="btn btn-primary" href="register.html">Go to Register</a>
         <a class="btn btn-outline-primary" href="attendance.html">Start Attendance</a>
+      </div>
+
+      <div class="image mt-4">
+        <img src="image.png" alt="attendance" class="img-fluid" />
       </div>
     </section>
   </main>

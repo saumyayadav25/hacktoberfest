@@ -1,4 +1,6 @@
-/* ---------------- Root Variables ---------------- */
+/* =========================================================
+   Root Variables
+========================================================= */
 :root {
   --bg: #f6f7fb;
   --card: #fff;
@@ -9,7 +11,9 @@
   --transition-speed: 0.25s;
 }
 
-/* ---------------- Base Styles ---------------- */
+/* =========================================================
+   Base Styles
+========================================================= */
 * {
   box-sizing: border-box;
 }
@@ -18,37 +22,42 @@ body {
   font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
   background: var(--bg);
   color: #222;
-  line-height: 1.6;
-  letter-spacing: 0.5px;
   margin: 0;
+  line-height: 1.6;
   transition: background var(--transition-speed) ease, color var(--transition-speed) ease;
 }
 
-/* ---------------- Navbar ---------------- */
-#main-navbar {
+/* =========================================================
+   Navbar
+========================================================= */
+#main-navbar, .navbar {
   background: var(--navbar-bg) !important;
   border-bottom: 1px solid var(--navbar-border);
   box-shadow: 0 2px 6px rgba(0,0,0,0.05);
   transition: all var(--transition-speed) ease;
 }
 
-#main-navbar .navbar-brand {
-  font-weight: 600;
+#main-navbar .navbar-brand, .logo {
+  font-weight: 700;
   color: #222;
 }
 
-#main-navbar .nav-link {
+#main-navbar .nav-link, .nav-links a {
   color: #333;
+  text-decoration: none;
   font-weight: 500;
   transition: color var(--transition-speed) ease;
+  margin-left: 18px;
 }
 
-#main-navbar .nav-link.active {
+#main-navbar .nav-link.active,
+.nav-links a.active {
   color: var(--accent);
   font-weight: 600;
 }
 
-#main-navbar .nav-link:hover {
+#main-navbar .nav-link:hover,
+.nav-links a:hover {
   color: #4dabf7;
 }
 
@@ -65,7 +74,9 @@ body {
   background-color: #ddd;
 }
 
-/* ---------------- Container & Cards ---------------- */
+/* =========================================================
+   Containers & Cards
+========================================================= */
 .container {
   max-width: 900px;
   margin: 2rem auto;
@@ -78,7 +89,7 @@ body {
   border-radius: 12px;
   box-shadow: 0 6px 20px rgba(0,0,0,0.1);
   margin-bottom: 2rem;
-  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease, background var(--transition-speed) ease, color var(--transition-speed) ease;
+  transition: all var(--transition-speed) ease;
 }
 
 .card:hover {
@@ -99,7 +110,9 @@ p, li {
   color: var(--muted);
 }
 
-/* ---------------- Forms ---------------- */
+/* =========================================================
+   Forms
+========================================================= */
 .form-row {
   display: flex;
   gap: 10px;
@@ -128,10 +141,16 @@ input[type="file"]:focus {
   outline: none;
 }
 
-/* ---------------- Buttons ---------------- */
+/* =========================================================
+   Buttons
+========================================================= */
 .btn, .btn-primary {
   border-radius: 10px;
   padding: 0.6rem 1.2rem;
+  background-color: var(--accent);
+  color: #fff;
+  border: none;
+  cursor: pointer;
   transition: all var(--transition-speed) ease;
 }
 
@@ -150,16 +169,24 @@ input[type="file"]:focus {
   box-shadow: 0 0 0 3px rgba(77,171,247,0.4);
 }
 
+.btn.outline,
 .btn-outline-primary {
+  background: transparent;
   color: var(--accent);
-  border-color: var(--accent);
+  border: 2px solid var(--accent);
+  transition: all var(--transition-speed) ease;
 }
 
+.btn.outline:hover,
 .btn-outline-primary:hover {
-  background-color: rgba(77,171,247,0.1);
+  background-color: var(--accent);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 120, 255, 0.3);
 }
 
-/* ---------------- Preview & Video ---------------- */
+/* =========================================================
+   Preview & Media
+========================================================= */
 .preview-area {
   display: flex;
   gap: 12px;
@@ -178,8 +205,31 @@ input[type="file"]:focus {
   transform: scale(1.02);
   box-shadow: 0 6px 18px rgba(0,0,0,0.35);
 }
+.image.mt-4 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.5rem;
+}
 
-/* ---------------- Lists ---------------- */
+.image.mt-4 img {
+  width: 90%; /* stretch a bit but still responsive */
+  max-height: 400px; /* prevents it from getting too large */
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+.image.mt-4 img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+
+
+/* =========================================================
+   Lists
+========================================================= */
 .list {
   margin-top: 12px;
   max-height: 220px;
@@ -189,7 +239,7 @@ input[type="file"]:focus {
   background: #fafafa;
   border: 1px solid #eee;
   box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
-  transition: background var(--transition-speed) ease, color var(--transition-speed) ease, border-color var(--transition-speed) ease;
+  transition: all var(--transition-speed) ease;
 }
 
 .list .item {
@@ -202,38 +252,91 @@ input[type="file"]:focus {
   background-color: rgba(0,0,0,0.03);
 }
 
-/* ---------------- Modal ---------------- */
+/* =========================================================
+   Registration Table
+========================================================= */
+.registration-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  text-align: left;
+}
+
+.registration-table th,
+.registration-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  vertical-align: middle;
+}
+
+.registration-table th {
+  background-color: #f4f4f4;
+  font-weight: 600;
+}
+
+.preview {
+  width: 60px;
+  height: 60px;
+  border-radius: 6px;
+  object-fit: cover;
+  display: block;
+  margin-top: 6px;
+}
+
+/* Responsive Table */
+@media (max-width: 700px) {
+  .registration-table, .registration-table thead, .registration-table tbody, 
+  .registration-table th, .registration-table td, .registration-table tr {
+    display: block;
+    width: 100%;
+  }
+  .registration-table tr {
+    margin-bottom: 10px;
+  }
+  .registration-table td {
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .registration-table th {
+    display: none;
+  }
+}
+
+/* =========================================================
+   Modal
+========================================================= */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.modal.hidden {
+  display: none;
+}
+
 .modal-inner {
   background: #fff;
   padding: 2rem;
   border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-  transition: all var(--transition-speed) ease;
   max-width: 400px;
   text-align: center;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
 }
 
-/* ---------------- Home quick list ---------------- */
-.quick-list {
-  list-style: disc;
-  margin-left: 20px;
-}
-
-/* ---------------- Home Actions ---------------- */
-.home-actions {
-  display: flex;
-  gap: 12px;
-  margin-top: 16px;
-  justify-content: center;
-}
-
-/* ---------------- Dark Mode ---------------- */
+/* =========================================================
+   Dark Mode
+========================================================= */
 body.dark-mode {
   background: #121212;
   color: #e0e0e0;
 }
 
-/* Navbar Dark Mode */
 body.dark-mode #main-navbar {
   background: #1e1e1e !important;
   border-bottom: 1px solid #333;
@@ -241,48 +344,29 @@ body.dark-mode #main-navbar {
 }
 
 body.dark-mode #main-navbar .navbar-brand {
-  color: #ffffff; /* Bright brand text */
-  font-weight: 700;
+  color: #fff;
 }
 
 body.dark-mode #main-navbar .nav-link {
   color: #ccc;
-  font-weight: 500;
 }
 
 body.dark-mode #main-navbar .nav-link.active {
   color: #4dabf7;
-  font-weight: 600;
 }
 
-body.dark-mode #main-navbar .nav-link:hover {
-  color: #82c7ff;
-}
-
-body.dark-mode .navbar-toggler-icon {
-  filter: invert(100%); /* Makes the icon visible in dark mode */
-}
-
-/* Theme toggle button */
 body.dark-mode .theme-btn {
   background-color: #2a2a2a;
   color: #f0f0f0;
   border: 1px solid #555;
 }
 
-body.dark-mode .theme-btn:hover {
-  background-color: #333;
-}
-
-/* Cards */
 body.dark-mode .card {
   background: #1e1e1e;
   color: #e0e0e0;
   border: 1px solid #333;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
 }
 
-/* Inputs */
 body.dark-mode input[type="text"],
 body.dark-mode input[type="file"] {
   background: #2a2a2a;
@@ -290,27 +374,16 @@ body.dark-mode input[type="file"] {
   border-color: #444;
 }
 
-/* Lists */
 body.dark-mode .list {
   background: #1a1a1a;
   border-color: #333;
   color: #ddd;
-  box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
 }
 
-/* Solid primary button in dark mode */
 body.dark-mode .btn-primary {
-  background-color: #4dabf7 !important;  /* bright blue */
-  color: #fff !important;
-  border: none;
+  background-color: #4dabf7 !important;
 }
 
-body.dark-mode .btn-primary:hover {
-  background-color: #66b2ff !important;
-  color: #fff !important;
-}
-
-/* Outline primary button in dark mode */
 body.dark-mode .btn-outline-primary {
   background: transparent;
   color: #4dabf7 !important;
@@ -322,71 +395,12 @@ body.dark-mode .btn-outline-primary:hover {
   color: #fff !important;
 }
 
-
-/* Preview & Video */
-body.dark-mode .preview-area img, body.dark-mode video {
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.35);
-}
-
-/* Modal */
 body.dark-mode .modal-inner {
   background: #1f1f1f;
   color: #eee;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.6);
 }
 
-/* Smooth transitions */
-body.dark-mode *,
-body.dark-mode .card,
-body.dark-mode input,
-body.dark-mode .btn,
-body.dark-mode .list,
-body.dark-mode .modal-inner,
-body.dark-mode video,
-body.dark-mode img {
+/* Smooth transition for dark mode */
+body.dark-mode *, body.dark-mode .card, body.dark-mode input, body.dark-mode .btn {
   transition: all 0.3s ease-in-out;
 }
-
-/* Fix Start Attendance Button Hover (Light Mode) */
-.btn.outline,
-.btn-outline-primary {
-  background: transparent;
-  color: var(--accent);
-  border: 2px solid var(--accent);
-  transition: all var(--transition-speed) ease;
-}
-
-.btn.outline:hover,
-.btn-outline-primary:hover {
-  background-color: var(--accent);
-  color: #fff; /* Make text readable on hover */
-  border-color: var(--accent);
-  box-shadow: 0 4px 12px rgba(0, 120, 255, 0.3);
-}
-
-/* Input text and placeholder fix for dark mode */
-body.dark-mode input[type="text"],
-body.dark-mode input[type="file"],
-body.dark-mode textarea {
-  background: #2a2a2a;
-  color: #f0f0f0;
-  border-color: #444;
-}
-
-/* Make placeholder text readable */
-body.dark-mode input::placeholder,
-body.dark-mode textarea::placeholder {
-  color: #bbb; /* light gray for visibility */
-  opacity: 1;  /* ensures consistent brightness across browsers */
-}
-
-/* Hover & focus styles for better UX */
-body.dark-mode input[type="text"]:focus,
-body.dark-mode input[type="file"]:focus,
-body.dark-mode textarea:focus {
-  border-color: #4dabf7;
-  box-shadow: 0 0 6px rgba(77, 171, 247, 0.5);
-  outline: none;
-}
-
