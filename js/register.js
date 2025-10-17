@@ -41,49 +41,83 @@ document.addEventListener('DOMContentLoaded', ()=>{
     img.src = URL.createObjectURL(f);
   });
 
-  btn.addEventListener('click', async ()=>{
-    const name = nameInput.value.trim(); 
-    const id = idInput.value.trim();
-    if(!name) return result.innerText = 'Enter name first';
-    if(!fileInput.files[0]) return result.innerText = 'Choose an image file';
+ btn.addEventListener('click', async () => {
+  const name = nameInput.value.trim();
+  const id = idInput.value.trim();
+  const nameRegex = /^[A-Za-z\s]+$/;
+  const idRegex = /^\d+$/;
 
-    result.innerText = 'Loading models...';
-    const ok = await SmartAttendance.loadModelsUI();
-    if(!ok) return result.innerText = 'Model load failed';
+  // === Validation ===
+  if (!name || !id) {
+    result.innerText = 'Please enter both name and roll number.';
+    return;
+  }
+  if (!nameRegex.test(name)) {
+    result.innerText = 'Name can only contain letters and spaces.';
+    return;
+  }
+  if (!idRegex.test(id)) {
+    result.innerText = 'Roll number must contain digits only.';
+    return;
+  }
+  if (!fileInput.files[0]) {
+    result.innerText = 'Please choose an image file.';
+    return;
+  }
 
-    result.innerText = 'Detecting face...';
-    try{
-      const detection = await faceapi.detectSingleFace(img, new faceapi.TinyFaceDetectorOptions())
-                                      .withFaceLandmarks()
-                                      .withFaceDescriptor();
-      if(!detection) return result.innerText = 'No face found in image';
+  // Continue with your original logic:
+  result.innerText = 'Loading models...';
+  const ok = await SmartAttendance.loadModelsUI();
+  if (!ok) {
+    result.innerText = 'Model load failed';
+    return;
+  }
 
-      loadDBAndConvert();
+  result.innerText = 'Detecting face...';
+  try {
+    const detection = await faceapi
+      .detectSingleFace(img, new faceapi.TinyFaceDetectorOptions())
+      .withFaceLandmarks()
+      .withFaceDescriptor();
+    if (!detection) return result.innerText = 'No face found in image';
 
-      // duplicate name
-      const nameDup = SmartAttendance.registeredFaces.some(st => st.name.toLowerCase() === name.toLowerCase());
-      if(nameDup){ showModal('Student already registered with this name'); return; }
+    loadDBAndConvert();
 
-      // duplicate face
-      const isDuplicateFace = SmartAttendance.registeredFaces.some(st=>{
-        return faceapi.euclideanDistance(st.descriptor, detection.descriptor) < 0.6;
-      });
-      if(isDuplicateFace){ showModal('This face is already registered'); return; }
+    // duplicate name
+    const nameDup = SmartAttendance.registeredFaces.some(
+      st => st.name.toLowerCase() === name.toLowerCase()
+    );
+    if (nameDup) {
+      showModal('Student already registered with this name');
+      return;
+    }
 
-      // add student
-      const newStudent = {
-        name,
-        id,
-        descriptor: Array.from(detection.descriptor)
-      };
-      SmartAttendance.registeredFaces.push(newStudent);
-      SmartAttendance.saveDB();
+    // duplicate face
+    const isDuplicateFace = SmartAttendance.registeredFaces.some(st =>
+      faceapi.euclideanDistance(st.descriptor, detection.descriptor) < 0.6
+    );
+    if (isDuplicateFace) {
+      showModal('This face is already registered');
+      return;
+    }
 
-      result.innerText = `Registered ${name}`;
-      showModal(`${name} registered successfully`);
-      refreshList();
+    // add student
+    const newStudent = {
+      name,
+      id,
+      descriptor: Array.from(detection.descriptor)
+    };
+    SmartAttendance.registeredFaces.push(newStudent);
+    SmartAttendance.saveDB();
 
-    }catch(e){ console.error(e); result.innerText = 'Error during registration'; }
-  });
+    result.innerText = `Registered ${name}`;
+    showModal(`${name} registered successfully`);
+    refreshList();
+  } catch (e) {
+    console.error(e);
+    result.innerText = 'Error during registration';
+  }
+});
+
 
 });

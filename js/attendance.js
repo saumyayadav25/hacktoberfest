@@ -91,4 +91,48 @@ document.addEventListener('DOMContentLoaded', ()=>{
     URL.revokeObjectURL(url);
   });
 
+  const attendanceTableBody = document.querySelector('#attendanceTable tbody');
+const searchInput = document.getElementById('searchInput');
+
+function renderAttendanceHistory(filter = '') {
+  SmartAttendance.loadDB();
+  const log = SmartAttendance.attendanceLog; // { '2025-10-13': [ {name, id, time}, ... ] }
+
+  attendanceTableBody.innerHTML = '';
+
+  const dates = Object.keys(log).sort((a, b) => b.localeCompare(a)); // latest first
+
+  dates.forEach(date => {
+    log[date].forEach(entry => {
+      const nameMatch = entry.name.toLowerCase().includes(filter.toLowerCase());
+      const idMatch = (entry.id || '').includes(filter);
+
+      if (!filter || nameMatch || idMatch) {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${date}</td>
+          <td>${entry.name}</td>
+          <td>${entry.id || '-'}</td>
+          <td>Present</td>
+        `;
+        attendanceTableBody.appendChild(tr);
+      }
+    });
+  });
+
+  if (!attendanceTableBody.children.length) {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td colspan="4">No records found</td>`;
+    attendanceTableBody.appendChild(tr);
+  }
+}
+
+// Filter as user types
+searchInput.addEventListener('input', () => {
+  renderAttendanceHistory(searchInput.value.trim());
+});
+
+// Initial render
+renderAttendanceHistory();
+
 });

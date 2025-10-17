@@ -43,6 +43,26 @@
       <div id="attResult" class="status mt-2"></div>
       <h3 class="mt-4">Today's Attendance</h3>
       <div id="todayList" class="list"></div>
+
+      <h3>Attendance History</h3>
+<div class="search-row">
+  <input type="text" id="searchInput" placeholder="Search by name or roll number..." />
+</div>
+
+<table id="attendanceTable" class="attendance-table">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Name</th>
+      <th>Roll Number</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Rows dynamically added here -->
+  </tbody>
+</table>
+
     </section>
   </main>
 
