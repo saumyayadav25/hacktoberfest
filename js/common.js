@@ -99,6 +99,44 @@ function markAttendanceRecord(person) {
   return { ok: true };
 }
 
+// ------------------- Mark All Present -------------------
+const markAllBtn = document.getElementById("markAllBtn");
+if (markAllBtn) {
+  markAllBtn.addEventListener("click", () => {
+    if (!registeredFaces.length) {
+      alert("No students registered yet!");
+      return;
+    }
+
+    const today = todayISO();
+    if (!attendanceLog[today]) attendanceLog[today] = [];
+
+    registeredFaces.forEach((student) => {
+      // Avoid duplicates within 5 minutes
+      const cutoff = Date.now() - 5 * 60 * 1000;
+      if (
+        !attendanceLog[today].some(
+          (it) =>
+            (it.id === student.id || it.name === student.name) &&
+            it.timestamp > cutoff
+        )
+      ) {
+        attendanceLog[today].push({
+          name: student.name,
+          id: student.id,
+          time: timeNow(),
+          timestamp: Date.now(),
+        });
+      }
+    });
+
+    saveDB();
+    alert("All registered students marked present for today!");
+    // Refresh Today's Attendance list if function exists
+    if (window.renderTodayList) window.renderTodayList();
+  });
+}
+
 // model loader
 async function loadModelsUI() {
   try {
@@ -113,9 +151,6 @@ async function loadModelsUI() {
     return false;
   }
 }
-
-// initialize DB into memory
-loadDB();
 
 // ------------------- Dark/Light Mode Integration -------------------
 const toggleBtn = document.getElementById("theme-toggle");
@@ -136,6 +171,9 @@ if (toggleBtn) {
     localStorage.setItem("theme", isDark ? "dark" : "light");
   });
 }
+
+// initialize DB into memory
+loadDB();
 
 // expose
 window.SmartAttendance = {
